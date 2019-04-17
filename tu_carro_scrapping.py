@@ -18,6 +18,29 @@ buyer = tree.xpath('//div[@title="buyer-name"]/text()')
 #This will create a list of prices
 prices = tree.xpath('//span[@class="item-price"]/text()')
 
+
+#filter of car year and km
+year_and_kilometres_from_internet = tree.xpath('//div[@class="item__attrs"]/text()')
+year_and_kilometres = np.zeros(len(year_and_kilometres_from_internet))
+years= np.zeros(len(year_and_kilometres_from_internet))
+kilometres= np.zeros(len(year_and_kilometres_from_internet))
+
+for i in range(len(year_and_kilometres_from_internet)):
+    year_km=year_and_kilometres_from_internet[i]
+    year_km= year_km.replace('|','')
+    year_km= year_km.replace('km','')
+    year_km= year_km.split('  ')
+    year= year_km[0]
+    year= year.replace(' ','')
+    years[i]=year
+    km= year_km[1]
+    km= km.replace(' ','')
+    kilometres[i]=km
+        
+
+#filter of car location
+location = tree.xpath('//div[@class="item__location"]/text()')
+
 #filter of car names
 car_name_from_internet = tree.xpath('//span[@class="main-title"]/text()')
 car_name = np.array(car_name_from_internet)

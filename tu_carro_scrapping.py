@@ -18,13 +18,13 @@ buyer = tree.xpath('//div[@title="buyer-name"]/text()')
 #This will create a list of prices
 prices = tree.xpath('//span[@class="item-price"]/text()')
 
-#filtrado nombres
-nombre_carros_directo = tree.xpath('//span[@class="main-title"]/text()')
-nombre_carros_directo = np.array(nombre_carros_directo)
+#filter of car names
+car_name_from_internet = tree.xpath('//span[@class="main-title"]/text()')
+car_name = np.array(car_name_from_internet)
 
-#filtrado precios carros
-precio_carros_directo = tree.xpath('//span[@class="price__fraction"]/text()')
-precio_carros= np.zeros(len(precio_carros_directo))
+#filter of car prices
+car_price_from_internet = tree.xpath('//span[@class="price__fraction"]/text()')
+car_price= np.zeros(len(car_price_from_internet))
 
-for i in range (len(precio_carros)):
-    precio_carros[i]=precio_carros_directo[i].replace('.','')
+for i in range (len(car_price_from_internet)):
+    car_price[i]=car_price_from_internet[i].replace('.','')

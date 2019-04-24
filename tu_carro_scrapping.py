@@ -4,15 +4,22 @@ import requests
 import matplotlib.pyplot as plt
 
 
-page = requests.get('https://carros.tucarro.com.co/')
+page = requests.get('https://carros.tucarro.com.co/_Desde_51')
 tree = html.fromstring(page.content)
 
+#cars quantity
+quantity_from_internet = tree.xpath('//div[@class="quantity-results"]/text()')
+quantity = quantity_from_internet[0].replace('resultados','')
+quantity = quantity.replace(' ','')
+quantity = quantity.replace('.','')
+quantity = float(quantity)
+quantity = quantity%50
 
 #ejemplo en html para scraping
 #<div title="buyer-name">Carson Busses</div>
 #<span class="item-price">$29.95</span>
 
-
+#examples
 #This will create a list of buyers:
 buyer = tree.xpath('//div[@title="buyer-name"]/text()')
 #This will create a list of prices
@@ -36,7 +43,7 @@ for i in range(len(year_and_kilometres_from_internet)):
     km= year_km[1]
     km= km.replace(' ','')
     kilometres[i]=km
-        
+
 
 #filter of car location
 location = tree.xpath('//div[@class="item__location"]/text()')
